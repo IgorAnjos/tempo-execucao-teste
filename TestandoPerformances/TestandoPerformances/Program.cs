@@ -54,6 +54,41 @@ namespace TestandoPerformances
 
             #endregion
 
+            #region Comparação de Concatenação de String e StringBuilder
+
+            string[] palavras = { "Palmeiras", "Real Madri", "Barcelona", "Internacional",
+                                  "Brasil", "Holanda", "Alemanha", "Desenvolvimento" };
+
+            var totalDePalvras = 100000;
+            Console.WriteLine();
+            Console.WriteLine("Testando Concatenação de Texto: Total de {0:N2}", totalDePalvras);
+            var dataInicioString = DateTime.Now;
+
+            var novaString = string.Empty;
+            for (int i = 0; i < totalDePalvras; i++)
+            {
+                novaString += palavras[random.Next(0, 7)];
+            }
+            var dataTerminoString = DateTime.Now;
+            var tempoString = dataTerminoString - dataInicioString;
+
+            Console.WriteLine($"Tempo utilizado com o string += { tempoString.Minutes }m "
+                            + $"{ tempoString.Seconds }s { tempoString.Milliseconds }mm");
+
+            var dataInicioSB = DateTime.Now;
+            StringBuilder novaSB = new StringBuilder();
+
+            for (int i = 0; i < totalDePalvras; i++)
+            {
+                novaSB.Append(palavras[random.Next(0, 7)]);
+            }
+            var dataTerminoSB = DateTime.Now;
+            var tempoSB = dataTerminoSB - dataInicioSB;
+
+            Console.WriteLine($"Tempo utilizado com o StringBuilder { tempoSB.Minutes }m "
+                            + $"{ tempoSB.Seconds }s { tempoSB.Milliseconds }mm");
+
+            #endregion
         }
 
         public static DateTime PrimeiroDiaDoMesConvert(DateTime data)
